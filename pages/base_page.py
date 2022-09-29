@@ -40,7 +40,7 @@ class BasePage:
     """Скролим к нужному элементу"""
 
     def go_to_element(self, element):
-        self.driver.executr_script("argument[0].scrollIntoView")
+        self.driver.execute_script("arguments[0].scrollIntoView();" , element)
 
 
 
