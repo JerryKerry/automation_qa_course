@@ -1,6 +1,6 @@
 import time
 
-from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage
+from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage
 
 
 # Тест сравнивает введенные данные с данными поступившими в систему
@@ -46,6 +46,22 @@ class TestElements:
             assert output_yes == 'Yes'
             assert output_impressive == 'impressive'
             assert output_no == 'no'
+
+    class TestWebTable:
+        def test_web_table_add_person(self,driver):
+            web_table_page = WebTablePage(driver, 'https://demoqa.com/webtables')
+            web_table_page.open()
+            new_person = web_table_page.add_new_person()
+            table_result = web_table_page.check_new_added_person()
+            print(new_person)
+            print(table_result)
+            # проверяем, что новый пользователь находится в полученном массиве
+            assert new_person in table_result
+            time.sleep(10)
+
+
+
+
 
 
 

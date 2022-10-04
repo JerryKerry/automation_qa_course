@@ -16,7 +16,7 @@ class BasePage:
         return wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
 
     """проверяем видимость нескольких элементов"""
-    def element_are_visible(self, locator,timeout = 5):
+    def elements_are_visible(self, locator, timeout = 5):
         return wait(self.driver, timeout).until(EC.visibility_of_all_elements_located(locator))
 
     """Проверяем элемент по дом дереву , чтобы не скролитьт =)"""
@@ -24,7 +24,7 @@ class BasePage:
         return wait(self.driver, timeout).until(EC.presence_of_element_located(locator))
 
     """Проверяем элементы  по дом дереву - много """
-    def element_are_present(self, locator,timeout = 5):
+    def elements_are_present(self, locator, timeout = 5):
         return wait(self.driver, timeout).until(EC.presence_of_all_elements_located(locator))
 
     """Ищем элементы  невидимый"""
