@@ -1,9 +1,9 @@
 import time
 
+from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage
 
-from pages.elements_page import TextBoxPage
 
-
+# Тест сравнивает введенные данные с данными поступившими в систему
 class TestElements:
     class TestTextBox:
 
@@ -17,3 +17,78 @@ class TestElements:
             assert current_address == output_cur_addr
             assert permanent_address == output_per_addr
             print(text_box_page.check_filled_form())
+
+# Тест кликает рандомно на чек-боксы и сравнивает кликнутые чек-боксы с выводом системы
+    class TestCheckBox:
+        def test_check_box(selfs, driver):
+            check_box_page = CheckBoxPage(driver, 'https://demoqa.com/checkbox')
+            check_box_page.open()
+            check_box_page.open_full_list()
+            check_box_page.click_random_checkbox()
+            input_checkbox = check_box_page.get_checked_checkboxes()
+            output_result = check_box_page.get_otput_result()
+            print(input_checkbox)
+            print(output_result)
+            assert input_checkbox == output_result
+            time.sleep(5)
+
+# Тест с багом
+    class TestRadioButton:
+        def test_radio_button(self, driver):
+            radio_button_page = RadioButtonPage(driver, 'https://demoqa.com/radio-button')
+            radio_button_page.open()
+            radio_button_page.click_on_the_radio_button('yes')
+            output_yes = radio_button_page.get_otput_result()
+            radio_button_page.click_on_the_radio_button('impressive')
+            output_impressive = radio_button_page.get_otput_result()
+            radio_button_page.click_on_the_radio_button('no')
+            output_no = radio_button_page.get_otput_result()
+            assert output_yes == 'Yes'
+            assert output_impressive == 'impressive'
+            assert output_no == 'no'
+
+    class TestWebTable:
+        def test_web_table_add_person(self,driver):
+            web_table_page = WebTablePage(driver, 'https://demoqa.com/webtables')
+            web_table_page.open()
+            new_person = web_table_page.add_new_person()
+            table_result = web_table_page.check_new_added_person()
+            print(new_person)
+            print(table_result)
+            # проверяем, что новый пользователь находится в полученном массиве
+            assert new_person in table_result
+            time.sleep(10)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
